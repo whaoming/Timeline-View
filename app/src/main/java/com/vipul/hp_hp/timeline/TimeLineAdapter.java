@@ -2,7 +2,6 @@ package com.vipul.hp_hp.timeline;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -39,7 +38,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
         if(mOrientation == Orientation.horizontal) {
             view = View.inflate(parent.getContext(), R.layout.item_timeline_horizontal, null);
         } else {
-            view = View.inflate(parent.getContext(), R.layout.item_timeline, null);
+            view = View.inflate(parent.getContext(), R.layout.view_item_timeline, null);
         }
 
         return new TimeLineViewHolder(view, viewType);
@@ -50,7 +49,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
 
         TimeLineModel timeLineModel = mFeedList.get(position);
 
-        holder.name.setText("name：" + timeLineModel.getName() + "    age：" + timeLineModel.getAge());
+//        holder.name.setText("name：" + timeLineModel.getName() + "    age：" + timeLineModel.getAge());
 
     }
 

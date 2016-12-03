@@ -2,8 +2,15 @@ package com.vipul.hp_hp.timelineview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -11,9 +18,10 @@ import android.view.View;
 /**
  * Created by HP-HP on 05-12-2015.
  */
-public class TimelineView extends View {
+public class TimelineView2 extends View {
 
-    private Drawable mMarker;
+    private  Paint paint;
+    private RoundImageDrawable mMarker;
     private Drawable mStartLine;
     private Drawable mEndLine;
     private int mMarkerSize;
@@ -25,15 +33,32 @@ public class TimelineView extends View {
     private Context mContext;
 
 
-    public TimelineView(Context context, AttributeSet attrs) {
+    public TimelineView2(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
+        paint = new Paint();
         init(attrs);
+
     }
 
+    /**
+     * <attr name="marker" format="color|reference"/>
+         <attr name="line" format="color|reference"/>
+       <attr name="marker_size" format="dimension"/>
+        <attr name="line_size" format="dimension"/>
+         <attr name="line_orientation" format="enum">
+           <enum name="horizontal" value="0"/>
+        <enum name="vertical" value="1"/>
+       </attr>
+      <attr name="markerInCenter" format="boolean"/>
+     * @param attrs
+     */
     private void init(AttributeSet attrs) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs,R.styleable.timeline_style);
-        mMarker = typedArray.getDrawable(R.styleable.timeline_style_marker);
+        Drawable drawable = typedArray.getDrawable(R.styleable.timeline_style_marker);
+
+        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+        mMarker = new RoundImageDrawable(bitmap);;
         mStartLine = typedArray.getDrawable(R.styleable.timeline_style_line);
         mEndLine = typedArray.getDrawable(R.styleable.timeline_style_line);
         mMarkerSize = typedArray.getDimensionPixelSize(R.styleable.timeline_style_marker_size, 25);
@@ -43,7 +68,7 @@ public class TimelineView extends View {
         typedArray.recycle();
 
         if(mMarker == null) {
-            mMarker = mContext.getResources().getDrawable(R.drawable.marker);
+//            mMarker = mContext.getResources().getDrawable(R.drawable.marker);
         }
     }
 
@@ -123,7 +148,7 @@ public class TimelineView extends View {
             }
 
             if(mEndLine != null) {
-                mEndLine.setBounds(lineLeft, mBounds.bottom+7, mLineSize + lineLeft, height-7);
+                mEndLine.setBounds(lineLeft, mBounds.bottom, mLineSize + lineLeft, height);
             }
 
         }
@@ -134,7 +159,19 @@ public class TimelineView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if(mMarker != null) {
-            mMarker.draw(canvas);
+
+//            ;
+//            Drawable drawable = getDrawable();
+                //Bitmap bitmap = ((BitmapDrawable) mMarker).getBitmap();
+//                Bitmap b = getCroppedBitmap(bitmap, 14);
+//                final Rect rectSrc = new Rect(0, 0, mMarker.getBounds().width(),  mMarker.getBounds().height());
+//                final Rect rectDest = new Rect(0,0,getWidth(),getHeight());
+//                paint.reset();
+//                canvas.drawBitmap(bitmap, 0,0, null);
+                mMarker.draw(canvas);
+//            mMarker.
+//            mMarker.draw(canvas){new };
+//            mStartLine.draw(canvas);
         }
 
         if(mStartLine != null) {
@@ -147,8 +184,36 @@ public class TimelineView extends View {
     }
 
     public void setMarker(Drawable marker) {
-        mMarker = marker;
+//        mMarker = marker;
         initDrawable();
+    }
+
+    public static Bitmap getCroppedBitmap(Bitmap bmp, int radius) {
+        Bitmap sbmp;
+        //比较初始Bitmap宽高和给定的圆形直径，判断是否需要缩放裁剪Bitmap对象
+        if (bmp.getWidth() != radius || bmp.getHeight() != radius)
+            sbmp = Bitmap.createScaledBitmap(bmp, radius, radius, false);
+        else
+            sbmp = bmp;
+        Bitmap output = Bitmap.createBitmap(sbmp.getWidth(), sbmp.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, sbmp.getWidth(), sbmp.getHeight());
+
+        paint.setAntiAlias(true);
+        paint.setFilterBitmap(true);
+        paint.setDither(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(Color.parseColor("#BAB399"));
+        canvas.drawCircle(sbmp.getWidth() / 2 + 0.7f,
+                sbmp.getHeight() / 2 + 0.7f, sbmp.getWidth() / 2 + 0.1f, paint);
+        //核心部分，设置两张图片的相交模式，在这里就是上面绘制的Circle和下面绘制的Bitmap
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(sbmp, rect, rect, paint);
+
+        return output;
     }
 
     public void setStartLine(Drawable startline) {

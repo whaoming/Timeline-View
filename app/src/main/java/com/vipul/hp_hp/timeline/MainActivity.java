@@ -7,6 +7,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.wxxiaomi.ming.CustomViewActivity;
+import com.wxxiaomi.ming.MyTimeLineActivity;
+
 /**
  * Created by HP-HP on 07-06-2016.
  */
@@ -14,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     public final static String TAG_ORIENTATION = "orientation";
 
-    private Button mVerticalTimeLineButton, mHorizontalTimeLineButton;
+    private Button mVerticalTimeLineButton, mHorizontalTimeLineButton,go;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onButtonClick(Orientation.horizontal);
+            }
+        });
+        go = (Button) findViewById(R.id.go);
+        go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CustomViewActivity.class);
+                startActivity(intent);
             }
         });
 

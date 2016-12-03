@@ -6,10 +6,11 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content">
 
-    <com.vipul.hp_hp.timelineview.TimelineView
+    <com.vipul.hp_hp.timelineview.TimelineView2
         android:id="@+id/time_marker"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+
         app:marker_size="25dp"
         app:line_size="2dp"
         app:line="@color/colorPrimary"/>

@@ -18,10 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".TimeLineActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.wxxiaomi.ming.MyTimeLineActivity" />
+        <activity android:name="com.wxxiaomi.ming.CustomViewActivity" />
+        <activity android:name="com.com.wxxiaomi.demo.LatestActivity"></activity>
     </application>
 
 </manifest>

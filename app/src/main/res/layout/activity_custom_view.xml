@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_custom_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    >
+    <com.vipul.hp_hp.timelineview.TimelineView2
+        android:id="@+id/time_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:marker="@mipmap/demo"
+        app:marker_size="25dp"
+        app:line_size="2dp"
+        app:line="@color/colorPrimary"/>
+
+    <com.vipul.hp_hp.timelineview.TimeLineImageView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        zhy:image="@mipmap/demo"
+        zhy:imageScaleType="center"
+        zhy:titleText1="妹子~"
+        zhy:titleTextColor1="#ff0000"
+        zhy:titleTextSize1="12sp" />
+
+
+</LinearLayout>
