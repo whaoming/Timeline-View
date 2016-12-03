@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.com.wxxiaomi.demo.LatestActivity;
 import com.wxxiaomi.ming.CustomViewActivity;
 import com.wxxiaomi.ming.MyTimeLineActivity;
 
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CustomViewActivity.class);
+                Intent intent = new Intent(MainActivity.this, LatestActivity.class);
                 startActivity(intent);
             }
         });

@@ -6,4 +6,5 @@ package com.wxxiaomi.ming.bean;
 
 public class MyModel {
     public int type;
+    public String pics;
 }

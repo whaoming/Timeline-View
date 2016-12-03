@@ -32,21 +32,13 @@ public class LatestActivity extends AppCompatActivity {
 
     private void init() {
         for(int i = 1;i <21;i++) {
-//            TimeLineModel model = new TimeLineModel();
-//            model.setName("Random"+i);
-//            model.setAge(i);
-//            mDataList.add(model);
-//            if(i%4==0){
-//
-//            }else if(i%4==1){
-//
-//            }else if()
             MyModel m = new MyModel();
-            m.type = i;
+            m.type = (i%4);
+            if(i%2==0) m.pics="asdasd";
             list.add(m);
         }
 
-        adapter = new MyAdapter(list);
+        adapter = new MyAdapter(list,this);
         mRecyclerView.setAdapter(adapter);
     }
 
